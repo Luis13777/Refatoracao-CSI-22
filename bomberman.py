@@ -1,3 +1,5 @@
+# ===== OI ===== 
+
 # ===== Inicialização =====
 # ----- Importa e inicia pacotes
 import pygame
