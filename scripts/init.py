@@ -57,3 +57,13 @@ imagem=[bomb_img,exp1_img,exp2_img,exp3_img]
 
 # ----- Configura a tela inicial
 click = False
+
+# Criando um grupo de blocos 
+all_woods = pygame.sprite.Group()
+all_bricks = pygame.sprite.Group()
+
+# Criando um grupo de sprites
+all_sprites = pygame.sprite.Group()
+all_bombs = pygame.sprite.Group()
+all_blocks = pygame.sprite.Group()
+all_players = pygame.sprite.Group()
