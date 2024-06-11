@@ -2,7 +2,7 @@ import pygame
 from scripts.data import *
 from scripts.init import *
 from scripts.auxFuncs import *
-
+from scripts.loadFiles import *
 
 # Definindo os novos tipos
 class brick(pygame.sprite.Sprite):

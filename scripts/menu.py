@@ -1,26 +1,35 @@
 import pygame
 from scripts.data import *
-from scripts.run import *
+# from scripts.run import *
 from scripts.init import *
 
+def draw_text(text, font, color, surface, x, y):
+    textobj = font.render(text, 1, color)
+    textrect = textobj.get_rect()
+    textrect.topleft = (x, y)
+    surface.blit(textobj, textrect)
 
 def main_menu():
+
+    window = DISPLAY["pygameDisplay"]
+
     click = False
     while True:
 
         window.fill((0, 255, 100))
-        window.blit(bg_img, (0,0))
-        window.blit(boneco1_img, (140,80))
-        window.blit(boneco_img, (530,80))
-        draw_text('Bomber Smash', title, (255, 255, 255), window, 155, 100)
+        window.blit(IMAGENS["BACKGROUND"]["pygameImage"], (0,0))
+        window.blit(IMAGENS["BONECO2"]["pygameImage"], (140,80))
+        window.blit(IMAGENS["BONECO1"]["pygameImage"], (530,80))
 
-        draw_text('CONTROLES P1', font, (255, 255, 255), window, 10, 175)
-        draw_text('SETAS', font, (255, 255, 255), window, 10, 260)
-        draw_text('BOMBA: SHIFT', font, (255, 255, 255), window, 10, 300)
+        draw_text('Bomber Smash', FONTS["BIG"]["pygameFont"], (255, 255, 255), window, 155, 100)
 
-        draw_text('CONTROLES P2', font, (255, 255, 255), window, 450, 175)
-        draw_text('WASD', font, (255, 255, 255), window, 450, 260)
-        draw_text('BOMBA: ESPAÇO', font, (255, 255, 255), window, 450, 300)
+        draw_text('CONTROLES P1', FONTS["NORMAL"]["pygameFont"], (255, 255, 255), window, 10, 175)
+        draw_text('SETAS', FONTS["NORMAL"]["pygameFont"], (255, 255, 255), window, 10, 260)
+        draw_text('BOMBA: SHIFT', FONTS["NORMAL"]["pygameFont"], (255, 255, 255), window, 10, 300)
+
+        draw_text('CONTROLES P2', FONTS["NORMAL"]["pygameFont"], (255, 255, 255), window, 450, 175)
+        draw_text('WASD', FONTS["NORMAL"]["pygameFont"], (255, 255, 255), window, 450, 260)
+        draw_text('BOMBA: ESPAÇO', FONTS["NORMAL"]["pygameFont"], (255, 255, 255), window, 450, 300)
 
         # ----- Configura os botões clicáveis
         mx, my = pygame.mouse.get_pos()
@@ -31,14 +40,15 @@ def main_menu():
 
         if button_1.collidepoint((mx, my)):
             if click:
-                game()
+                # game()
+                pass
         if button_2.collidepoint((mx, my)):
             if click:
                 pygame.QUIT()
         pygame.draw.rect(window, (255, 0, 0), button_1)
         pygame.draw.rect(window, (255, 0, 0), button_2)
-        draw_text('JOGAR', font, (0, 0, 0), window, 310, 410)
-        draw_text('SAIR', font, (0, 0, 0), window, 330, 510)
+        draw_text('JOGAR', FONTS["NORMAL"]["pygameFont"], (0, 0, 0), window, 310, 410)
+        draw_text('SAIR', FONTS["NORMAL"]["pygameFont"], (0, 0, 0), window, 330, 510)
 
         click = False
         for event in pygame.event.get():

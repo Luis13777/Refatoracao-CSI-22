@@ -1,4 +1,7 @@
 from scripts.menu import *
+from scripts.init import *
 
 # ----- Abre o jogo
-main_menu()
+if __name__ == '__main__':
+    init_game()
+    main_menu()

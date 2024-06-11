@@ -1,10 +1,10 @@
 import pygame
 from scripts.data import *
 from scripts.init import *
-
+from scripts.loadFiles import *
 
 # ----- Configura as telas finais de vitória de cada jogador
-def win_p1():
+def win_p1(window):
     while True:
 
         window.fill((0, 255, 100))
@@ -37,7 +37,7 @@ def win_p1():
 
         pygame.display.update()
 
-def win_p2():
+def win_p2(window):
     while True:
 
         window.fill((0, 255, 100))

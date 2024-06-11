@@ -1,10 +1,9 @@
+import pygame
 
-WIDTH = 750
-HEIGHT = 650
+DISPLAY = {"WIDTH": 750, "HEIGHT": 650, "FPS": 30, "pygameDisplay": None, "TITLE": "Bomber Smash"}
 
-# ----- Inicia assets
-# Define o nosso mapa, onde 0 são espaços livres e 1 são tijolos, 5 e 6 são os jogadores
-LAYOUT = [
+
+MAPA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1],
     [1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1,6,1,],
     [1, -1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,-1,1],
@@ -20,14 +19,40 @@ LAYOUT = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1],
         ]
 
-# ----- Define as constantes
-BONECO_WIDTH = 45
-BONECO_HEIGHT = 40
-BRICK_WIDTH=50
-BRICK_HEIGHT=50
-WOOD_WIDTH=50
-WOOD_HEIGHT=50
-BOMB_WIDTH=90
-BOMB_HEIGHT=90
-EXP_WIDTH=100
-EXP_HEIGHT=100
+
+# LAYOUT = {
+#     "BONECO": {"WIDTH": 45, "HEIGHT": 40},
+#     "BLOCK": {"WIDTH": 50, "HEIGHT": 50},
+#     "BOMB": {"WIDTH": 90, "HEIGHT": 90},
+#     "EXPLOSION": {"WIDTH": 100, "HEIGHT": 100}
+# }
+
+IMAGENS = {
+    "BONECO1": {"CAMINHO": "hulk verde.png", "pygameImage": None, "WIDTH": 45, "HEIGHT": 40},
+    "BONECO2": {"CAMINHO": "hulk.png", "pygameImage": None, "WIDTH": 45, "HEIGHT": 40},
+    "BONECO1BIG": {"CAMINHO": "hulk verde.png", "pygameImage": None, "WIDTH": 300, "HEIGHT": 300},
+    "BONECO2BIG": {"CAMINHO": "hulk.png", "pygameImage": None, "WIDTH": 300, "HEIGHT": 300},
+    "BRICK": {"CAMINHO": "bricks.png", "pygameImage": None, "WIDTH": 50, "HEIGHT": 50},
+    "WOOD": {"CAMINHO": "wood.png", "pygameImage": None, "WIDTH": 50, "HEIGHT": 50},
+    "BOMB": {"CAMINHO": "bomb.png", "pygameImage": None, "WIDTH": 90, "HEIGHT": 90},
+    "SAND": {"CAMINHO": "sand.png", "pygameImage": None, "WIDTH": 750, "HEIGHT": 650},
+    "EXPLOSION1": {"CAMINHO": "exp1.png", "pygameImage": None, "WIDTH": 100, "HEIGHT": 100},
+    "EXPLOSION2": {"CAMINHO": "exp2.png", "pygameImage": None, "WIDTH": 100, "HEIGHT": 100},
+    "EXPLOSION3": {"CAMINHO": "exp3.png", "pygameImage": None, "WIDTH": 100, "HEIGHT": 100},
+    "BACKGROUND": {"CAMINHO": "bg.jpeg", "pygameImage": None, "WIDTH": 750, "HEIGHT": 650}
+}
+
+SONS = {
+    "MUSICA": {"CAMINHO": "matue.mp3", "VOLUME": 0.1, "pygameSound": None},
+    "EXPLOSAO": {"CAMINHO": "explosao.mp3", "VOLUME": 0.2, "pygameSound": None}
+}
+
+FONTS = {
+    "NORMAL": {"SIZE": 48, "pygameFont": None}, "BIG": {"SIZE": 80, "pygameFont": None}}
+
+all_woods = pygame.sprite.Group()
+all_bricks = pygame.sprite.Group()
+all_sprites = pygame.sprite.Group()
+all_bombs = pygame.sprite.Group()
+all_blocks = pygame.sprite.Group()
+all_players = pygame.sprite.Group()
