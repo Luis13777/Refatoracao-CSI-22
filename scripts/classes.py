@@ -3,37 +3,41 @@ from scripts.data import *
 from scripts.init import *
 from scripts.auxFuncs import *
 
+
+
 # Definindo os novos tipos
-class brick(pygame.sprite.Sprite):
+class obstaculo(pygame.sprite.Sprite):
     def __init__(self, img,x,y):
         # Construtor da classe mãe (Sprite).
-        pygame.sprite.Sprite.__init__(self)
+        super().__init__()
 
         self.image = img
         self.rect = self.image.get_rect()
         self.rect.x = x*IMAGENS["BRICK"]["WIDTH"]
         self.rect.y = y*IMAGENS["BRICK"]["HEIGHT"]
 
-class wood(pygame.sprite.Sprite):
+        self.x = x
+        self.y = y
+
+
+# Definindo os novos tipos
+class brick(obstaculo):
     def __init__(self, img,x,y):
         # Construtor da classe mãe (Sprite).
-        pygame.sprite.Sprite.__init__(self)
+        super().__init__(img,x,y)
 
-        self.image = img
-        self.rect = self.image.get_rect()
-        self.rect.x = x*IMAGENS["WOOD"]["WIDTH"]
-        self.rect.y = y*IMAGENS["WOOD"]["HEIGHT"]
-
-        self.x = x
-        self.y =y 
-    
-
-
-
-class Player1(pygame.sprite.Sprite):
-    def __init__(self, img, all_sprites, all_bombs,x,y):
+class wood(obstaculo):
+    def __init__(self, img,x,y):
         # Construtor da classe mãe (Sprite).
-        pygame.sprite.Sprite.__init__(self)
+        super().__init__(img,x,y)
+
+
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self, img, all_sprites, all_bombs,x,y, player_number):
+        self.player_number = player_number
+        # Construtor da classe mãe (Sprite).
+        super().__init__()
 
         self.image = img
         self.rect = self.image.get_rect()
@@ -42,8 +46,7 @@ class Player1(pygame.sprite.Sprite):
         self.all_sprites = all_sprites
         self.all_bombs = all_bombs
         
-        self.x = x
-        self.y = y
+
 
         #condicoes iniciais de tempo para soltar a bomba
         self.last_update = pygame.time.get_ticks()
@@ -51,66 +54,17 @@ class Player1(pygame.sprite.Sprite):
         self.last_shot = pygame.time.get_ticks()
         self.shoot_ticks = 3000
     
-
-
-
-    def update(self):
-        # Atualização da posição do boneco
-        self.rect.x = self.x*IMAGENS["BRICK"]["WIDTH"]
-        self.rect.y = self.y*IMAGENS["BRICK"]["HEIGHT"]
-
-    
-    
-    def shoot(self):
-        # A nova bomba vai ser criada logo acima do personagem com um cooldown de 3 segundos
-        now = pygame.time.get_ticks()
-
-        elapsed_ticks = now - self.last_shot
-
-        if elapsed_ticks > self.shoot_ticks:
-            
-
-            self.last_shot = now
-
-            new_bomb = Bomb(self.rect.bottom+17, self.rect.centerx+2, self.x, self.y)
-            self.all_sprites.add(new_bomb)
-            self.all_bombs.add(new_bomb)
-
-    def win(self):
-        win_p2()
-
-            
-
-
-
-class Player2(pygame.sprite.Sprite):
-    def __init__(self, img, all_sprites, all_bombs,x,y):
-        # Construtor da classe mãe (Sprite).
-        pygame.sprite.Sprite.__init__(self)
-
-        self.image = img
-        self.rect = self.image.get_rect()
-        self.rect.x = x*IMAGENS["BRICK"]["WIDTH"]
-        self.rect.y = y*IMAGENS["BRICK"]["HEIGHT"]
-        self.all_sprites = all_sprites
-        self.all_bombs = all_bombs
-
         self.x = x
-        self.y = y 
+        self.y = y
 
-        #condicoes iniciais de tempo da bomba
-        self.last_update = pygame.time.get_ticks()
-        self.frame_ticks = 10
-        self.last_shot = pygame.time.get_ticks()
-        self.shoot_ticks = 3000
 
     def update(self):
         # Atualização da posição do boneco
         self.rect.x = self.x*IMAGENS["BRICK"]["WIDTH"]
         self.rect.y = self.y*IMAGENS["BRICK"]["HEIGHT"]
 
-
-        
+    
+    
     def shoot(self):
         # A nova bomba vai ser criada logo acima do personagem com um cooldown de 3 segundos
         now = pygame.time.get_ticks()
@@ -118,15 +72,17 @@ class Player2(pygame.sprite.Sprite):
         elapsed_ticks = now - self.last_shot
 
         if elapsed_ticks > self.shoot_ticks:
+            
 
             self.last_shot = now
 
             new_bomb = Bomb(self.rect.bottom+17, self.rect.centerx+2, self.x, self.y)
             self.all_sprites.add(new_bomb)
             self.all_bombs.add(new_bomb)
-    
+
     def win(self):
-        win_p1()
+        win(self.player_number)
+
 
 class Bomb(pygame.sprite.Sprite):
     # Construtor da classe.
@@ -191,14 +147,8 @@ class Bomb(pygame.sprite.Sprite):
             hits = pygame.sprite.groupcollide(all_bombs,all_woods,False,False)
             for bomba, woods in hits.items():
                 possiveis = [(self.i + 1, self.j), (self.i - 1, self.j), (self.i, self.j+ 1), (self.i, self.j - 1)]
-                # self.kill()
                 for wood in woods:
-                    #os comentarios abaixo foram feitos para nos ajudar a achar o erro na matriz(invertemos linha e coluna), caso queira ver tambem
-                    #print(wood)
-                    # print((wood.y, wood.x))
-                    # print((self.i, self.j))
                     if (wood.y, wood.x) in possiveis:
-            
                         MAPA[wood.y][wood.x] = 0
                         wood.kill()
 
@@ -212,10 +162,7 @@ class Bomb(pygame.sprite.Sprite):
                         if (player.y,player.x) in possiveis:
                             MAPA[player.y][player.x] = 0
                             player.win()
-             
-
                             player.kill()
-            
             self.kill()
 
                             

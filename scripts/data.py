@@ -22,18 +22,11 @@ MAPA = [
         ]
 
 
-# LAYOUT = {
-#     "BONECO": {"WIDTH": 45, "HEIGHT": 40},
-#     "BLOCK": {"WIDTH": 50, "HEIGHT": 50},
-#     "BOMB": {"WIDTH": 90, "HEIGHT": 90},
-#     "EXPLOSION": {"WIDTH": 100, "HEIGHT": 100}
-# }
-
 IMAGENS = {
     "BONECO1": {"CAMINHO": "hulk verde.png", "pygameImage": None, "WIDTH": 45, "HEIGHT": 40},
     "BONECO2": {"CAMINHO": "hulk.png", "pygameImage": None, "WIDTH": 45, "HEIGHT": 40},
-    "BONECO1BIG": {"CAMINHO": "hulk verde.png", "pygameImage": None, "WIDTH": 300, "HEIGHT": 300},
-    "BONECO2BIG": {"CAMINHO": "hulk.png", "pygameImage": None, "WIDTH": 300, "HEIGHT": 300},
+    "BONECO2BIG": {"CAMINHO": "hulk verde.png", "pygameImage": None, "WIDTH": 300, "HEIGHT": 300},
+    "BONECO1BIG": {"CAMINHO": "hulk.png", "pygameImage": None, "WIDTH": 300, "HEIGHT": 300},
     "BRICK": {"CAMINHO": "bricks.png", "pygameImage": None, "WIDTH": 50, "HEIGHT": 50},
     "WOOD": {"CAMINHO": "wood.png", "pygameImage": None, "WIDTH": 50, "HEIGHT": 50},
     "BOMB": {"CAMINHO": "bomb.png", "pygameImage": None, "WIDTH": 90, "HEIGHT": 90},

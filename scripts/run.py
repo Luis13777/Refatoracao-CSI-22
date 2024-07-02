@@ -21,19 +21,19 @@ def game():
                 if r ==3 or r==4:
                     madeira =wood(IMAGENS["WOOD"]["pygameImage"],c,l)
                     all_woods.add(madeira)
-                    MAPA[l][c] =1
+                    MAPA[l][c] = 1
                 else:
-                    MAPA[l][c] =0
+                    MAPA[l][c] = 0
 
             if item == 5 :
 
-                MAPA[l][c] =0 
-                player1 = Player1(IMAGENS["BONECO1"]["pygameImage"], all_sprites, all_bombs,c,l)
+                MAPA[l][c] = 0 
+                player1 = Player(IMAGENS["BONECO1"]["pygameImage"], all_sprites, all_bombs,c,l, 1)
                 
             
             if item == 6:
-                MAPA[l][c] =0
-                player2 = Player2(IMAGENS["BONECO2"]["pygameImage"],all_sprites, all_bombs,c,l)
+                MAPA[l][c] = 0
+                player2 = Player(IMAGENS["BONECO2"]["pygameImage"],all_sprites, all_bombs,c,l, 2)
                 
     # adicionando aos grupos de sprites
     all_sprites.add(player1)
