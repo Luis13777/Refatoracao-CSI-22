@@ -1,9 +1,7 @@
 import pygame
 
 
-
 DISPLAY = {"WIDTH": 750, "HEIGHT": 650, "FPS": 30, "pygameDisplay": None, "TITLE": "Bomber Smash"}
-
 
 MAPA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1],
@@ -20,14 +18,6 @@ MAPA = [
     [1, 5, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1,-1,1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1],
         ]
-
-
-# LAYOUT = {
-#     "BONECO": {"WIDTH": 45, "HEIGHT": 40},
-#     "BLOCK": {"WIDTH": 50, "HEIGHT": 50},
-#     "BOMB": {"WIDTH": 90, "HEIGHT": 90},
-#     "EXPLOSION": {"WIDTH": 100, "HEIGHT": 100}
-# }
 
 IMAGENS = {
     "BONECO1": {"CAMINHO": "hulk verde.png", "pygameImage": None, "WIDTH": 45, "HEIGHT": 40},

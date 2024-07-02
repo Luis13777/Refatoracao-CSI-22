@@ -33,13 +33,13 @@ def main_menu():
         button_1 = pygame.Rect(275, 400, 200, 50)
         button_2 = pygame.Rect(275, 500, 200, 50)
 
-
         if button_1.collidepoint((mx, my)):
             if click:
                 game()
         if button_2.collidepoint((mx, my)):
             if click:
                 pygame.QUIT()
+                
         pygame.draw.rect(window, (255, 0, 0), button_1)
         pygame.draw.rect(window, (255, 0, 0), button_2)
         draw_text('JOGAR', FONTS["NORMAL"]["pygameFont"], (0, 0, 0), window, 310, 410)
