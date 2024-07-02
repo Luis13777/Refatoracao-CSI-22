@@ -10,29 +10,28 @@ def game():
     # Criando os blocos do mapa
     for l in range (len(MAPA)):
         for c in range (len(MAPA[l])):
-            item = MAPA[l][c]
+            index = MAPA[l][c]
             
-            if item == 1:
+            if cenario[index] == "brick":
                 pedra = brick(IMAGENS["BRICK"]["pygameImage"],c,l)
                 all_bricks.add(pedra)
             
-            if item == 0:
-                r= random.randint(2,4)
-                if r ==3 or r==4:
+            if cenario[index] == "air":
+                r = random.randint(2,4)
+                if r == 3 or r == 4:
                     madeira =wood(IMAGENS["WOOD"]["pygameImage"],c,l)
                     all_woods.add(madeira)
-                    MAPA[l][c] =1
+                    MAPA[l][c] = 1
                 else:
-                    MAPA[l][c] =0
+                    MAPA[l][c] = 0
 
-            if item == 5 :
-
-                MAPA[l][c] =0 
+            if cenario[index] == "player1":
+                MAPA[l][c] = 0 
                 player1 = Player1(IMAGENS["BONECO1"]["pygameImage"], all_sprites, all_bombs,c,l)
                 
             
-            if item == 6:
-                MAPA[l][c] =0
+            if cenario[index] == "player2":
+                MAPA[l][c] = 0
                 player2 = Player2(IMAGENS["BONECO2"]["pygameImage"],all_sprites, all_bombs,c,l)
                 
     # adicionando aos grupos de sprites

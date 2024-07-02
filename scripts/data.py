@@ -3,6 +3,8 @@ import pygame
 
 DISPLAY = {"WIDTH": 750, "HEIGHT": 650, "FPS": 30, "pygameDisplay": None, "TITLE": "Bomber Smash"}
 
+cenario = {'air': 0, 'wood': 1, 'brick': 2, 'player1': 5, 'player2': 6}
+
 MAPA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1],
     [1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1,6,1,],
