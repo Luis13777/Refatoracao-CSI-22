@@ -3,10 +3,11 @@ from scripts.data import *
 from scripts.init import *
 from scripts.auxFuncs import *
 
+
 # Definindo os novos tipos
 class brick(pygame.sprite.Sprite):
     def __init__(self, img,x,y):
-        # Construtor da classe mãe (Sprite).
+        # Construtor da classe mãe (Sprite)
         pygame.sprite.Sprite.__init__(self)
 
         self.image = img
@@ -17,7 +18,7 @@ class brick(pygame.sprite.Sprite):
 
 class wood(pygame.sprite.Sprite):
     def __init__(self, img,x,y):
-        # Construtor da classe mãe (Sprite).
+        # Construtor da classe mãe (Sprite)
         pygame.sprite.Sprite.__init__(self)
 
         self.image = img
@@ -73,7 +74,7 @@ class Player1(pygame.sprite.Sprite):
 
 class Player2(pygame.sprite.Sprite):
     def __init__(self, img, all_sprites, all_bombs,x,y):
-        # Construtor da classe mãe (Sprite).
+        # Construtor da classe mãe (Sprite)
         pygame.sprite.Sprite.__init__(self)
 
         self.image = img
@@ -86,7 +87,7 @@ class Player2(pygame.sprite.Sprite):
         self.x = x
         self.y = y 
 
-        #condicoes iniciais de tempo da bomba
+        # Condições iniciais de tempo da bomba
         self.last_update = pygame.time.get_ticks()
         self.frame_ticks = 10
         self.last_shot = pygame.time.get_ticks()
@@ -118,7 +119,7 @@ class Player2(pygame.sprite.Sprite):
 class Bomb(pygame.sprite.Sprite):
     # Construtor da classe
     def __init__(self, bottom, centerx,i,j):
-        # Construtor da classe mãe (Sprite).
+        # Construtor da classe mãe (Sprite)
         pygame.sprite.Sprite.__init__(self)
 
         self.image = IMAGENS["BOMB"]["pygameImage"]
@@ -171,25 +172,20 @@ class Bomb(pygame.sprite.Sprite):
             self.rect.centerx = centerx
             self.rect.bottom = bottom
 
-            # explodindo as caixas 
+            # Explodindo as caixas 
             hits = pygame.sprite.groupcollide(all_bombs,all_woods,False,False)
-            for bomba, woods in hits.items():
+            for _, woods in hits.items():
                 possiveis = [(self.i + 1, self.j), (self.i - 1, self.j), (self.i, self.j+ 1), (self.i, self.j - 1)]
-                # self.kill()
                 for wood in woods:
-                    #os comentarios abaixo foram feitos para nos ajudar a achar o erro na matriz(invertemos linha e coluna), caso queira ver tambem
-                    #print(wood)
-                    # print((wood.y, wood.x))
-                    # print((self.i, self.j))
                     if (wood.y, wood.x) in possiveis:
             
                         MAPA[wood.y][wood.x] = 0
                         wood.kill()
 
-            # bomba matando o jogador 
+            # Bomba matando o jogador 
             kill = pygame.sprite.groupcollide(all_bombs,all_players,False,False)
     
-            for bomba,players in kill.items():
+            for _,players in kill.items():
                 possiveis = [(self.i + 1, self.j), (self.i - 1, self.j), (self.i, self.j+ 1), (self.i, self.j - 1),(self.i,self.j)]
 
                 for player in players: 
