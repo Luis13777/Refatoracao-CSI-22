@@ -77,7 +77,7 @@ class Player1(pygame.sprite.Sprite):
             self.all_bombs.add(new_bomb)
 
     def win(self):
-        win_p2()
+        win(2)
 
             
 
@@ -126,7 +126,7 @@ class Player2(pygame.sprite.Sprite):
             self.all_bombs.add(new_bomb)
     
     def win(self):
-        win_p1()
+        win(1)
 
 class Bomb(pygame.sprite.Sprite):
     # Construtor da classe.
