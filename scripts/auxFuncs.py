@@ -17,7 +17,7 @@ def win(winning_team):
         window.fill((0, 255, 100))
         window.blit(IMAGENS["BACKGROUND"]["pygameImage"], (0,0))
 
-        draw_text('O JOGADOR 1 VENCEU!', FONTS["NORMAL"]["pygameFont"], (255, 255, 255), window, 50, 100)
+        draw_text('O JOGADOR ' + str(winning_team) + ' VENCEU!', FONTS["NORMAL"]["pygameFont"], (255, 255, 255), window, 50, 100)
 
         imgname = "BONECO" + str(winning_team) + "BIG"
 
