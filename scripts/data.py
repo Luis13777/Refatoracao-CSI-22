@@ -1,5 +1,7 @@
 import pygame
 
+
+
 DISPLAY = {"WIDTH": 750, "HEIGHT": 650, "FPS": 30, "pygameDisplay": None, "TITLE": "Bomber Smash"}
 
 
@@ -56,3 +58,6 @@ all_sprites = pygame.sprite.Group()
 all_bombs = pygame.sprite.Group()
 all_blocks = pygame.sprite.Group()
 all_players = pygame.sprite.Group()
+
+clock = pygame.time.Clock()
+FPS = 30

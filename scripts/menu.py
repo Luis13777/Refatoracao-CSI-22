@@ -1,13 +1,9 @@
 import pygame
 from scripts.data import *
-# from scripts.run import *
+from scripts.run import *
 from scripts.init import *
+from scripts.auxFuncs import *
 
-def draw_text(text, font, color, surface, x, y):
-    textobj = font.render(text, 1, color)
-    textrect = textobj.get_rect()
-    textrect.topleft = (x, y)
-    surface.blit(textobj, textrect)
 
 def main_menu():
 
@@ -40,8 +36,7 @@ def main_menu():
 
         if button_1.collidepoint((mx, my)):
             if click:
-                # game()
-                pass
+                game()
         if button_2.collidepoint((mx, my)):
             if click:
                 pygame.QUIT()

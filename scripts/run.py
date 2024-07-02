@@ -1,14 +1,55 @@
 import pygame
+import random
 from scripts.data import *
 from scripts.init import *
 from scripts.classes import *
 
 
 def game():
+
+    # Criando os blocos do mapa
+    for l in range (len(MAPA)):
+        for c in range (len(MAPA[l])):
+            item = MAPA[l][c]
+            
+            if item == 1:
+                pedra = brick(IMAGENS["BRICK"]["pygameImage"],c,l)
+                all_bricks.add(pedra)
+            
+            if item == 0:
+                r= random.randint(2,4)
+                if r ==3 or r==4:
+                    madeira =wood(IMAGENS["WOOD"]["pygameImage"],c,l)
+                    all_woods.add(madeira)
+                    MAPA[l][c] =1
+                else:
+                    MAPA[l][c] =0
+
+            if item == 5 :
+
+                MAPA[l][c] =0 
+                player1 = Player1(IMAGENS["BONECO1"]["pygameImage"], all_sprites, all_bombs,c,l)
+                
+            
+            if item == 6:
+                MAPA[l][c] =0
+                player2 = Player2(IMAGENS["BONECO2"]["pygameImage"],all_sprites, all_bombs,c,l)
+                
+    # adicionando aos grupos de sprites
+    all_sprites.add(player1)
+    all_sprites.add(player2)
+    all_sprites.add(all_bricks)
+    all_sprites.add(all_woods)
+    all_blocks.add(all_bricks)
+    all_blocks.add(all_woods)
+    all_players.add(player1)
+    all_players.add(player2)
+
+
+    game = True
     # ===== Loop principal =====
     while game:
         clock.tick(FPS)
-
         # ----- Trata eventos
         for event in pygame.event.get():
             # ----- Verifica consequências
@@ -19,19 +60,19 @@ def game():
                 # AÇÕES PLAYER 1
             
                 if event.key == pygame.K_LEFT:
-                    if LAYOUT[player1.y][player1.x - 1] in[0,-1] :
+                    if MAPA[player1.y][player1.x - 1] in [0,-1] :
                         player1.x -= 1 
             
                 if event.key == pygame.K_RIGHT: 
-                    if LAYOUT[player1.y][player1.x + 1] in[0,-1]:
+                    if MAPA[player1.y][player1.x + 1] in [0,-1]:
                         player1.x += 1 
             
                 if event.key == pygame.K_UP:
-                    if LAYOUT[player1.y - 1][player1.x] in[0,-1]:
+                    if MAPA[player1.y - 1][player1.x] in [0,-1]:
                         player1.y -=1
                 
                 if event.key == pygame.K_DOWN:
-                    if LAYOUT[player1.y + 1][player1.x] in[0,-1]:
+                    if MAPA[player1.y + 1][player1.x] in [0,-1]:
                         player1.y +=1
                     
                 if event.key == pygame.K_RSHIFT:
@@ -40,19 +81,19 @@ def game():
                 #AÇÕES PLAYER 2
 
                 if event.key == pygame.K_a:
-                    if LAYOUT[player2.y][player2.x - 1] in[0,-1] :
+                    if MAPA[player2.y][player2.x - 1] in[0,-1] :
                         player2.x -= 1 
                 
                 if event.key == pygame.K_d: 
-                    if LAYOUT[player2.y][player2.x + 1] in[0,-1]:
+                    if MAPA[player2.y][player2.x + 1] in[0,-1]:
                         player2.x += 1 
                 
                 if event.key == pygame.K_w:
-                    if LAYOUT[player2.y - 1][player2.x] in[0,-1]:
+                    if MAPA[player2.y - 1][player2.x] in[0,-1]:
                         player2.y -=1
                 
                 if event.key == pygame.K_s:
-                    if LAYOUT[player2.y + 1][player2.x] in[0,-1]:
+                    if MAPA[player2.y + 1][player2.x] in[0,-1]:
                         player2.y +=1
                     
                 if event.key == pygame.K_SPACE:
@@ -66,13 +107,13 @@ def game():
 
 
         # ----- Gera saídas
-        window.fill((0, 255, 100))  # Preenche com a cor verde
+        DISPLAY["pygameDisplay"] .fill((0, 255, 100))  # Preenche com a cor verde
 
-        window.blit(sand_img,(0,0))
+        DISPLAY["pygameDisplay"] .blit(IMAGENS["SAND"]["pygameImage"],(0,0))
 
 
         # Desenhando sprites
-        all_sprites.draw(window)
+        all_sprites.draw(DISPLAY["pygameDisplay"] )
 
         pygame.display.update()  # Mostra o novo frame para o jogador
 

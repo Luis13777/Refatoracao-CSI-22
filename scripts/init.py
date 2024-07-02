@@ -16,7 +16,7 @@ def init_game ():
 
     explosao = pygame.mixer.Sound(f'./assets/{SONS["EXPLOSAO"]["CAMINHO"]}')
     explosao.set_volume(SONS["EXPLOSAO"]["VOLUME"])
-
+    SONS["EXPLOSAO"]["pygameSound"] = explosao
 
 
     # ----- Configura a fonte
@@ -68,53 +68,8 @@ def init_game ():
     # all_blocks = pygame.sprite.Group()
     # all_players = pygame.sprite.Group()
 
-    # # ----- Gera tela principal
-    # window = pygame.display.set_mode((WIDTH, HEIGHT))
-    # pygame.display.set_caption('Bomber Smash')
-    # # ----- Configura a tela inicial
-    # click = False
 
-
-
-    # game = True
     # # Variável para o ajuste de velocidade
     # clock = pygame.time.Clock()
 
 
-    # # Criando os blocos do mapa
-    # for l in range (len(LAYOUT)):
-    #     for c in range (len(LAYOUT[l])):
-    #         item = LAYOUT[l][c]
-            
-    #         if item == 1:
-    #             pedra = brick(brick_img,c,l)
-    #             all_bricks.add(pedra)
-            
-    #         if item == 0:
-    #             r= random.randint(2,4)
-    #             if r ==3 or r==4:
-    #                 madeira =wood(wood_img,c,l)
-    #                 all_woods.add(madeira)
-    #                 LAYOUT[l][c] =1
-    #             else:
-    #                 LAYOUT[l][c] =0
-
-    #         if item == 5 :
-
-    #             LAYOUT[l][c] =0 
-    #             player1 = Player1(boneco_img, all_sprites, all_bombs,c,l,imagem)
-                
-            
-    #         if item == 6:
-    #             LAYOUT[l][c] =0
-    #             player2 = Player2(boneco1_img,all_sprites, all_bombs,c,l,imagem)
-                
-    # # adicionando aos grupos de sprites
-    # all_sprites.add(player1)
-    # all_sprites.add(player2)
-    # all_sprites.add(all_bricks)
-    # all_sprites.add(all_woods)
-    # all_blocks.add(all_bricks)
-    # all_blocks.add(all_woods)
-    # all_players.add(player1)
-    # all_players.add(player2)
