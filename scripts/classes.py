@@ -85,9 +85,9 @@ class Player(pygame.sprite.Sprite):
 
 
 class Bomb(pygame.sprite.Sprite):
-    # Construtor da classe
+    # Construtor da classe.
     def __init__(self, bottom, centerx,i,j):
-        # Construtor da classe mãe (Sprite)
+        # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
         self.image = IMAGENS["BOMB"]["pygameImage"]
@@ -107,6 +107,7 @@ class Bomb(pygame.sprite.Sprite):
     def update(self):
         self.tempo -= 2 
 
+
         if self.tempo>30 and self.tempo<=40:
             self.image = IMAGENS["EXPLOSION1"]["pygameImage"]
             centerx=self.expc
@@ -117,12 +118,14 @@ class Bomb(pygame.sprite.Sprite):
         if self.tempo == 30:
             SONS["EXPLOSAO"]["pygameSound"].play()
 
+            
         if self.tempo<=30 and self.tempo>20:
             self.image = IMAGENS["EXPLOSION2"]["pygameImage"]
             centerx=self.expc
             bottom=self.expb
             self.rect.centerx = centerx
             self.rect.bottom = bottom
+
             
         if self.tempo<=20 and self.tempo>10:
             self.image = IMAGENS["EXPLOSION3"]["pygameImage"]
@@ -140,19 +143,19 @@ class Bomb(pygame.sprite.Sprite):
             self.rect.centerx = centerx
             self.rect.bottom = bottom
 
-            # Explodindo as caixas 
+            # explodindo as caixas 
             hits = pygame.sprite.groupcollide(all_bombs,all_woods,False,False)
-            for _, woods in hits.items():
+            for bomba, woods in hits.items():
                 possiveis = [(self.i + 1, self.j), (self.i - 1, self.j), (self.i, self.j+ 1), (self.i, self.j - 1)]
                 for wood in woods:
                     if (wood.y, wood.x) in possiveis:
                         MAPA[wood.y][wood.x] = 0
                         wood.kill()
 
-            # Bomba matando o jogador 
+            # bomba matando o jogador 
             kill = pygame.sprite.groupcollide(all_bombs,all_players,False,False)
     
-            for _,players in kill.items():
+            for bomba,players in kill.items():
                 possiveis = [(self.i + 1, self.j), (self.i - 1, self.j), (self.i, self.j+ 1), (self.i, self.j - 1),(self.i,self.j)]
 
                 for player in players: 
@@ -161,3 +164,8 @@ class Bomb(pygame.sprite.Sprite):
                             player.win()
                             player.kill()
             self.kill()
+
+                            
+    
+
+            
