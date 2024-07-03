@@ -8,18 +8,18 @@ from scripts.classes import *
 def game():
 
     # Criando os blocos do mapa
-    for l in range (len(MAPA)):
-        for c in range (len(MAPA[l])):
-            item = MAPA[l][c]
+    for line in range (len(MAPA)):
+        for col in range (len(MAPA[line])):
+            index = MAPA[line][col]
             
-            if item == 1:
-                pedra = brick(IMAGENS["BRICK"]["pygameImage"],c,l)
+            if CENARIO[index] == "brick":
+                pedra = Brick(IMAGENS["BRICK"]["pygameImage"],col,line)
                 all_bricks.add(pedra)
             
-            if item == 0:
-                r= random.randint(2,4)
-                if r ==3 or r==4:
-                    madeira =wood(IMAGENS["WOOD"]["pygameImage"],c,l)
+            if CENARIO[index] == "random":
+                r = random.randint(2,4)
+                if r == 3 or r == 4:
+                    madeira = Wood(IMAGENS["WOOD"]["pygameImage"],col,line)
                     all_woods.add(madeira)
                     MAPA[l][c] = 1
                 else:
@@ -55,7 +55,7 @@ def game():
             # ----- Verifica consequências
             if event.type == pygame.QUIT:
                 game = False
-            # Verifica se apertou alguma tecla.
+            # Verifica se apertou alguma tecla
             if event.type == pygame.KEYDOWN:    
                 # AÇÕES PLAYER 1
             

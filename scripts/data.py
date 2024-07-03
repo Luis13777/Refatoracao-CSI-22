@@ -1,9 +1,10 @@
 import pygame
 
 
-
 DISPLAY = {"WIDTH": 750, "HEIGHT": 650, "FPS": 30, "pygameDisplay": None, "TITLE": "Bomber Smash"}
 
+CENARIO = {-1: "air", 0: "random", 1: "brick", 5: "player1", 6: "player2"}
+# random: the tile is set to be air or wood at random
 
 MAPA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1],

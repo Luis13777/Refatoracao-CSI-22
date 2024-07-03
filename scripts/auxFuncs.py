@@ -3,12 +3,12 @@ from scripts.data import *
 from scripts.init import *
 
 
-
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
     textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
+    
 
 # ----- Configura as telas finais de vitória de cada jogador
 def win(player_number):
@@ -23,7 +23,6 @@ def win(player_number):
         mx, my = pygame.mouse.get_pos()
 
         button_1 = pygame.Rect(250, 200, 230, 40)
-
 
         if button_1.collidepoint((mx, my)):
             if click:
