@@ -5,113 +5,62 @@ from scripts.auxFuncs import *
 
 
 # Definindo os novos tipos
-class brick(pygame.sprite.Sprite):
-    def __init__(self, img,x,y):
-        # Construtor da classe mãe (Sprite)
+class TileElement(pygame.sprite.Sprite):
+    def __init__(self, img, x, y, width_key, height_key):
         pygame.sprite.Sprite.__init__(self)
-
         self.image = img
         self.rect = self.image.get_rect()
-        self.rect.x = x*IMAGENS["BRICK"]["WIDTH"]
-        self.rect.y = y*IMAGENS["BRICK"]["HEIGHT"]
-
-
-class wood(pygame.sprite.Sprite):
-    def __init__(self, img,x,y):
-        # Construtor da classe mãe (Sprite)
-        pygame.sprite.Sprite.__init__(self)
-
-        self.image = img
-        self.rect = self.image.get_rect()
-        self.rect.x = x*IMAGENS["WOOD"]["WIDTH"]
-        self.rect.y = y*IMAGENS["WOOD"]["HEIGHT"]
-
-        self.x = x
-        self.y = y 
-
-
-class Player1(pygame.sprite.Sprite):
-    def __init__(self, img, all_sprites, all_bombs,x,y):
-        # Construtor da classe mãe (Sprite)
-        pygame.sprite.Sprite.__init__(self)
-
-        self.image = img
-        self.rect = self.image.get_rect()
-        self.rect.x = x*IMAGENS["BRICK"]["WIDTH"]
-        self.rect.y = y*IMAGENS["BRICK"]["HEIGHT"]
-        self.all_sprites = all_sprites
-        self.all_bombs = all_bombs
-        
+        self.rect.x = x * IMAGENS[width_key]["WIDTH"]
+        self.rect.y = y * IMAGENS[height_key]["HEIGHT"]
         self.x = x
         self.y = y
 
-        # Condicões iniciais de tempo para soltar a bomba
+class Brick(TileElement):
+    def __init__(self, img, x, y):
+        super().__init__(img, x, y, "WOOD", "WOOD")
+
+
+class Wood(TileElement):
+    def __init__(self, img, x, y):
+        super().__init__(img, x, y, "BRICK", "BRICK")
+
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self, img, all_sprites, all_bombs, x, y):
+        # Construtor da classe mãe (Sprite)
+        pygame.sprite.Sprite.__init__(self)
+        self.image = img
+        self.rect = self.image.get_rect()
+        self.rect.x = x * IMAGENS["BRICK"]["WIDTH"]
+        self.rect.y = y * IMAGENS["BRICK"]["HEIGHT"]
+        self.all_sprites = all_sprites
+        self.all_bombs = all_bombs
+        self.x = x
+        self.y = y
         self.last_update = pygame.time.get_ticks()
         self.frame_ticks = 10
         self.last_shot = pygame.time.get_ticks()
         self.shoot_ticks = 3000
 
     def update(self):
-        # Atualização da posição do boneco
-        self.rect.x = self.x*IMAGENS["BRICK"]["WIDTH"]
-        self.rect.y = self.y*IMAGENS["BRICK"]["HEIGHT"]
+        self.rect.x = self.x * IMAGENS["BRICK"]["WIDTH"]
+        self.rect.y = self.y * IMAGENS["BRICK"]["HEIGHT"]
 
     def shoot(self):
-        # A nova bomba vai ser criada logo acima do personagem com um cooldown de 3 segundos
         now = pygame.time.get_ticks()
-
         elapsed_ticks = now - self.last_shot
-
         if elapsed_ticks > self.shoot_ticks:
             self.last_shot = now
-            new_bomb = Bomb(self.rect.bottom+17, self.rect.centerx+2, self.x, self.y)
+            new_bomb = Bomb(self.rect.bottom + 17, self.rect.centerx + 2, self.x, self.y)
             self.all_sprites.add(new_bomb)
             self.all_bombs.add(new_bomb)
 
+
+class Player1(Player):
     def win(self):
         win(2)
 
-
-class Player2(pygame.sprite.Sprite):
-    def __init__(self, img, all_sprites, all_bombs,x,y):
-        # Construtor da classe mãe (Sprite)
-        pygame.sprite.Sprite.__init__(self)
-
-        self.image = img
-        self.rect = self.image.get_rect()
-        self.rect.x = x*IMAGENS["BRICK"]["WIDTH"]
-        self.rect.y = y*IMAGENS["BRICK"]["HEIGHT"]
-        self.all_sprites = all_sprites
-        self.all_bombs = all_bombs
-
-        self.x = x
-        self.y = y 
-
-        # Condições iniciais de tempo da bomba
-        self.last_update = pygame.time.get_ticks()
-        self.frame_ticks = 10
-        self.last_shot = pygame.time.get_ticks()
-        self.shoot_ticks = 3000
-
-    def update(self):
-        # Atualização da posição do boneco
-        self.rect.x = self.x*IMAGENS["BRICK"]["WIDTH"]
-        self.rect.y = self.y*IMAGENS["BRICK"]["HEIGHT"]
-
-    def shoot(self):
-        # A nova bomba vai ser criada logo acima do personagem com um cooldown de 3 segundos
-        now = pygame.time.get_ticks()
-
-        elapsed_ticks = now - self.last_shot
-
-        if elapsed_ticks > self.shoot_ticks:
-
-            self.last_shot = now
-
-            new_bomb = Bomb(self.rect.bottom+17, self.rect.centerx+2, self.x, self.y)
-            self.all_sprites.add(new_bomb)
-            self.all_bombs.add(new_bomb)
-    
+class Player2(Player):
     def win(self):
         win(1)
 

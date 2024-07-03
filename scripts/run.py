@@ -13,13 +13,13 @@ def game():
             index = MAPA[line][col]
             
             if CENARIO[index] == "brick":
-                pedra = brick(IMAGENS["BRICK"]["pygameImage"],col,line)
+                pedra = Brick(IMAGENS["BRICK"]["pygameImage"],col,line)
                 all_bricks.add(pedra)
             
             if CENARIO[index] == "random":
                 r = random.randint(2,4)
                 if r == 3 or r == 4:
-                    madeira =wood(IMAGENS["WOOD"]["pygameImage"],col,line)
+                    madeira = Wood(IMAGENS["WOOD"]["pygameImage"],col,line)
                     all_woods.add(madeira)
                     MAPA[line][col] = 1
                 else:
